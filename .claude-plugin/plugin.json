@@ -1,0 +1,10 @@
+{
+  "name": "trackiq-amazon-search-visibility-audit",
+  "version": "1.0.0",
+  "description": "TrackIQ: Amazon Search Visibility Audit \u2014 an Agent Skill that audits where your ASINs appear in Amazon search, the paid/organic overlap, and the revenue behind the queries you are absent from.",
+  "author": { "name": "TrackIQ", "url": "https://trackiq.com" },
+  "homepage": "https://trackiq.com/skills/trackiq-amazon-search-visibility-audit",
+  "repository": "https://github.com/TrackIQ-HQ/trackiq-amazon-search-visibility-audit",
+  "license": "MIT",
+  "keywords": ["amazon", "amazon-seller", "amazon-ads", "organic-rank", "rank-tracking", "share-of-voice", "seo", "keyword-cannibalisation", "search-visibility", "claude-skill", "agent-skills", "trackiq"]
+}

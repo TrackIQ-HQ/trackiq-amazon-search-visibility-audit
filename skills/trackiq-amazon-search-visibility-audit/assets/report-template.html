@@ -1,0 +1,256 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>{{BRAND}} — Search Visibility Audit — {{PERIOD}}</title>
+<style>
+:root{
+  --sage-deep:#17533F; --sage:#2F6B56; --olive:#778867;
+  --mist:#E7EDE2; --pale:#F1F5EF;
+  --mocha:#8A6A4F; --sand:#C4A574; --clay:#A97449; --taupe:#B7AA98;
+  --cream:#FDFBFA; --card:#FFFFFF; --soft:#F7F5EF;
+  --border:#E6E1D8; --border-subtle:#EFEAE3;
+  --ink:#1F2420; --sec:#586258; --muted:#8B8F86;
+  --success:#2F7A5A; --success-bg:#EEF7F1;
+  --danger:#B84636;  --danger-bg:#FFF3F1;
+  --warning:#8A6A4F; --warning-bg:#FFF7E6;
+  --r:12px; --shadow:0 8px 24px rgba(31,36,32,.06);
+  --ui:-apple-system,'Segoe UI',Inter,Arial,sans-serif;
+  --mono:ui-monospace,SFMono-Regular,Menlo,monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--cream);color:var(--ink);font-family:var(--ui);
+     font-size:15px;line-height:1.6;-webkit-font-smoothing:antialiased}
+.page{max-width:1180px;margin:0 auto;padding:0 28px 72px}
+.kicker{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.18em;color:var(--olive);margin:0 0 10px}
+h1,h2,h3{margin:0;font-weight:700;letter-spacing:-.02em}
+a{color:var(--sage-deep)}
+
+/* masthead */
+.mast{background:var(--sage-deep);margin:0 -28px 34px;padding:26px 28px;
+      display:flex;align-items:center;justify-content:space-between;gap:20px}
+.mast img{display:block;width:140px;height:38px;border:0}
+.mast .right{font-size:13px;font-weight:600;color:var(--sand);letter-spacing:.04em}
+
+/* cover */
+.cover h1{font-size:34px;line-height:1.2;margin-bottom:8px}
+.cover .sub{font-size:16px;color:var(--sec);margin:0 0 26px}
+.facts{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:0 0 14px}
+.fact{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:16px 18px}
+.fact .lab{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:6px}
+.fact .val{font-size:28px;font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.fact .note{font-size:12px;color:var(--sec);margin-top:5px}
+.meta-row{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;font-size:12px;color:var(--sec);margin-bottom:34px}
+.meta-row .lab{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);display:block;margin-bottom:3px}
+
+/* sections */
+section{margin:0 0 38px}
+.sec-title{border-top:3px solid var(--sage-deep);padding-top:14px;margin-bottom:6px;font-size:24px}
+.sec-sub{font-size:13px;color:var(--muted);margin:0 0 18px}
+
+/* tables */
+table{width:100%;border-collapse:collapse;background:var(--card);
+      border:1px solid var(--border);border-radius:var(--r);overflow:hidden;font-size:13px}
+th{background:var(--sage-deep);color:var(--cream);text-align:left;
+   font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:11px 14px;white-space:nowrap}
+td{padding:11px 14px;border-top:1px solid var(--border-subtle);color:var(--sec);vertical-align:top}
+td.num,th.num{text-align:right;font-variant-numeric:tabular-nums}
+td strong{color:var(--ink)}
+tr.total td{background:var(--soft);font-weight:700;color:var(--ink);border-top:2px solid var(--border)}
+
+/* state pills */
+.pill{display:inline-block;font-size:11px;font-weight:700;padding:3px 9px;border-radius:999px;white-space:nowrap}
+.pill.owned{background:var(--success-bg);color:var(--success)}
+.pill.doubled{background:var(--warning-bg);color:var(--warning)}
+.pill.bought{background:var(--pale);color:var(--sage-deep)}
+.pill.absent{background:var(--danger-bg);color:var(--danger)}
+.pill.untracked{background:var(--soft);color:var(--muted)}
+
+/* panels */
+.panel{background:var(--card);border:1px solid var(--border);border-left:5px solid var(--sage-deep);
+       border-radius:10px;padding:16px 18px;margin:16px 0}
+.panel.warn{border-left-color:var(--sand)}
+.panel .lab{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.14em;color:var(--muted);margin-bottom:6px}
+.panel p{margin:0;font-size:13px;color:var(--sec)}
+
+/* asin block */
+.asin{background:var(--card);border:1px solid var(--border);border-radius:var(--r);
+      box-shadow:var(--shadow);padding:22px;margin:0 0 20px}
+.asin .head{display:flex;justify-content:space-between;align-items:baseline;gap:16px;margin-bottom:4px}
+.asin h3{font-size:18px}
+.asin .sku{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.asin .line{font-size:13px;color:var(--sec);margin:0 0 14px}
+
+/* action lists */
+.acts{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.act{background:var(--card);border:1px solid var(--border);border-radius:var(--r);padding:18px;border-top:5px solid var(--sage-deep)}
+.act.stop{border-top-color:var(--danger)}
+.act.start{border-top-color:var(--success)}
+.act.listing{border-top-color:var(--sand)}
+.act h3{font-size:15px;margin-bottom:4px}
+.act .n{font-size:12px;color:var(--muted);margin:0 0 10px}
+.act ul{margin:0;padding-left:18px;font-size:13px;line-height:1.75;color:var(--sec)}
+
+/* footer */
+.foot{background:var(--sage-deep);margin:44px -28px 0;padding:18px 28px;
+      display:flex;align-items:center;justify-content:space-between}
+.foot img{display:block;width:40px;height:28px;border:0}
+.foot .t{font-size:12px;color:var(--mist)}
+
+@media(max-width:820px){
+  .facts,.meta-row,.acts{grid-template-columns:1fr 1fr}
+  table{font-size:12px}
+}
+@media print{
+  body{background:#fff}
+  .asin,.act{break-inside:avoid}
+}
+</style></head><body>
+<div class="page">
+
+  <div class="mast">
+    <img src="assets/trackiq-logo-white.png" alt="TrackIQ">
+    <span class="right">Search Visibility Audit</span>
+  </div>
+
+  <div class="cover">
+    <p class="kicker">{{PERIOD_UPPER}} · {{BRAND_UPPER}}</p>
+    <h1>{{HEADLINE}}</h1>
+    <p class="sub">{{SUBHEAD}}</p>
+
+    <div class="facts">
+      <div class="fact"><div class="lab">Revenue-bearing queries</div>
+        <div class="val">{{N_QUERIES}}</div><div class="note">across {{N_ASINS}} ASINs</div></div>
+      <div class="fact"><div class="lab">Page-one coverage</div>
+        <div class="val">{{COVERAGE_PCT}}</div><div class="note">{{COVERAGE_NOTE}}</div></div>
+      <div class="fact"><div class="lab">Paid and already ranked</div>
+        <div class="val">{{N_DOUBLED}}</div><div class="note">{{DOUBLED_SPEND}} of spend</div></div>
+      <div class="fact"><div class="lab">Gap, estimated</div>
+        <div class="val">{{GAP_REVENUE}}</div><div class="note">per month, see limits</div></div>
+    </div>
+
+    <div class="meta-row">
+      <div><span class="lab">Period</span>{{PERIOD}}</div>
+      <div><span class="lab">Rank read</span>{{RANK_DATE}}</div>
+      <div><span class="lab">Weeks observed</span>{{WEEKS_OBSERVED}} of {{WEEKS_TOTAL}}</div>
+      <div><span class="lab">Account</span>{{MARKETPLACE}} {{ACCOUNT_TYPE}}</div>
+    </div>
+  </div>
+
+  <section>
+    <h2 class="sec-title">Where the demand sits</h2>
+    <p class="sec-sub">Every query with a purchase or at least 1% impression share, by ASIN.</p>
+    <table>
+      <tr>
+        <th>ASIN</th><th>Product</th>
+        <th class="num">Queries</th><th class="num">Owned</th><th class="num">Doubled</th>
+        <th class="num">Bought</th><th class="num">Absent</th><th class="num">Untracked</th>
+        <th class="num">Share of voice</th><th class="num">Gap / mo</th>
+      </tr>
+      {{SUMMARY_ROWS}}
+      <tr class="total">
+        <td colspan="2">Total</td>
+        <td class="num">{{T_QUERIES}}</td><td class="num">{{T_OWNED}}</td><td class="num">{{T_DOUBLED}}</td>
+        <td class="num">{{T_BOUGHT}}</td><td class="num">{{T_ABSENT}}</td><td class="num">{{T_UNTRACKED}}</td>
+        <td class="num">{{T_SOV}}</td><td class="num">{{T_GAP}}</td>
+      </tr>
+    </table>
+    <div class="panel">
+      <div class="lab">How to read the states</div>
+      <p><strong>Owned</strong> — page one, not bought. Working.
+         <strong>Doubled</strong> — page one and bought; you are paying for a position you hold.
+         <strong>Bought</strong> — paid is carrying it; the position is rented.
+         <strong>Absent</strong> — demand you are not serving.
+         <strong>Untracked</strong> — never measured, which is not the same as not ranking.</p>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-title">{{ASIN_SECTION_TITLE}}</h2>
+    <p class="sec-sub">Biggest revenue first. Rank read {{RANK_DATE}}; a rank is a point-in-time reading, never an average.</p>
+
+    <!-- repeat one .asin block per ASIN -->
+    <div class="asin">
+      <div class="head">
+        <h3>{{A_NAME}}</h3>
+        <span class="sku">{{A_ASIN}}</span>
+      </div>
+      <p class="line">{{A_REVENUE}} revenue · {{A_ORDERS}} orders · ASP {{A_ASP}} · share of voice {{A_SOV}} of tracked queries</p>
+      <table>
+        <tr>
+          <th>Query</th><th class="num">Volume</th><th class="num">Rank</th>
+          <th>State</th><th class="num">Impr. share</th><th class="num">Purchases</th><th class="num">Gap / mo</th>
+        </tr>
+        {{A_QUERY_ROWS}}
+      </table>
+      <div class="panel warn">
+        <div class="lab">What this ASIN needs</div>
+        <p>{{A_VERDICT}}</p>
+      </div>
+    </div>
+    <!-- /repeat -->
+  </section>
+
+  <section>
+    <h2 class="sec-title">What to do</h2>
+    <p class="sec-sub">Four lists, ready to paste. Each line is a query.</p>
+    <div class="acts">
+      <div class="act">
+        <h3>Add to the rank tracker</h3>
+        <p class="n">{{N_ADD}} queries · revenue-bearing, never measured</p>
+        <ul>{{LIST_ADD}}</ul>
+      </div>
+      <div class="act stop">
+        <h3>Stop bidding</h3>
+        <p class="n">{{N_STOP}} queries · page one organic, low paid click share</p>
+        <ul>{{LIST_STOP}}</ul>
+      </div>
+      <div class="act start">
+        <h3>Start bidding</h3>
+        <p class="n">{{N_START}} queries · demand you are absent from</p>
+        <ul>{{LIST_START}}</ul>
+      </div>
+      <div class="act listing">
+        <h3>Fix the listing</h3>
+        <p class="n">{{N_LISTING}} ASINs · impressions without clicks</p>
+        <ul>{{LIST_LISTING}}</ul>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2 class="sec-title">What these numbers are, and what they are not</h2>
+    <p class="sec-sub">Read before quoting any figure above.</p>
+
+    <div class="panel warn">
+      <div class="lab">The gap is an estimate, not lost revenue</div>
+      <p>Gap revenue is <em>query purchases × scale × the ASIN's average selling price</em>,
+      scaled from {{WEEKS_OBSERVED}} observed weeks to a {{PERIOD_DAYS}}-day month. It is the
+      revenue currently transacting on queries where you are absent from the tracked set — not
+      money you would certainly capture. Some of it already reaches you through other queries.</p>
+    </div>
+
+    <div class="panel warn">
+      <div class="lab">Share of voice is of tracked queries, not of the category</div>
+      <p>It is your impressions as a share of market impressions across the revenue-bearing
+      queries measured here. It is not market share and should not be quoted as one.</p>
+    </div>
+
+    <div class="panel warn">
+      <div class="lab">Rank is ours only, read on one day</div>
+      <p>The data shows where your ASINs ranked on {{RANK_DATE}}. It does not show the results
+      page, so this report never states which competitor holds a position. Untracked queries are
+      reported as untracked, never as not ranking.</p>
+    </div>
+
+    <div class="panel warn">
+      <div class="lab">Coverage of the period</div>
+      <p>{{WEEKS_OBSERVED}} of {{WEEKS_TOTAL}} weeks returned data. {{WEEKS_CAVEAT}}</p>
+    </div>
+  </section>
+
+  <div class="foot">
+    <img src="assets/trackiq-bug-white.png" alt="TrackIQ">
+    <span class="t">{{ACCOUNT}} · {{PERIOD}} · prepared {{PREPARED}}</span>
+  </div>
+
+</div></body></html>
