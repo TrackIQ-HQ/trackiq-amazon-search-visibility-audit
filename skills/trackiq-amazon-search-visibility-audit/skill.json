@@ -1,19 +1,36 @@
 {
   "name": "trackiq-amazon-search-visibility-audit",
   "title": "TrackIQ: Amazon Search Visibility Audit",
+  "category": "search",
   "version": "1.0.0",
   "updated": "2026-09-18",
   "summary": "Audits where an Amazon brand's ASINs actually appear in search \u2014 organic rank per revenue-bearing query, the terms bought but not ranked, the terms ranked and still paid for, share of voice, and the revenue sitting behind the queries the brand is absent from.",
   "changelog": "First public release.",
   "requires": {
-    "mcp": ["trackiq"],
-    "tools": ["list_marketplaces", "show_products", "get_product_performance", "get_keyword_rank", "get_search_query_performance", "get_search_terms", "get_targets"],
+    "mcp": [
+      "trackiq"
+    ],
+    "tools": [
+      "list_marketplaces",
+      "show_products",
+      "get_product_performance",
+      "get_keyword_rank",
+      "get_search_query_performance",
+      "get_search_terms",
+      "get_targets"
+    ],
     "filesystem": false,
     "network": false,
     "third_party_apis": []
   },
   "delivery": {
-    "methods": ["in-chat", "file", "slack", "n8n", "email"],
+    "methods": [
+      "in-chat",
+      "file",
+      "slack",
+      "n8n",
+      "email"
+    ],
     "default": "in-chat",
     "note": "in-chat always works and is the fallback. file needs a filesystem, n8n needs network, slack and email need their tool connected. Outward sends confirm first."
   },
