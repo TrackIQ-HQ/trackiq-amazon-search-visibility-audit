@@ -2,8 +2,8 @@
   "name": "trackiq-amazon-search-visibility-audit",
   "title": "TrackIQ: Amazon Search Visibility Audit",
   "category": "search",
-  "version": "1.0.0",
-  "updated": "2026-09-18",
+  "version": "1.0.1",
+  "updated": "2026-10-06",
   "summary": "Audits where an Amazon brand's ASINs actually appear in search \u2014 organic rank per revenue-bearing query, the terms bought but not ranked, the terms ranked and still paid for, share of voice, and the revenue sitting behind the queries the brand is absent from.",
   "changelog": "First public release.",
   "requires": {
